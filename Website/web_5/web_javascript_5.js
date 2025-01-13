@@ -1,10 +1,13 @@
 ```javascript
-document.addEventListener('DOMContentLoaded', function() {
-  const toggleBtn = document.getElementById('toggle-btn');
-  const mobileNav = document.getElementById('mobile-nav');
+document.addEventListener("DOMContentLoaded", function() {
+    // Toggle mobile navigation menu
+    const menuBtn = document.querySelector('.md:hidden button');
+    const navLinks = document.querySelector('.md:hidden + div');
 
-  toggleBtn.addEventListener('click', function() {
-    mobileNav.classList.toggle('active');
-  });
+    menuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('hidden');
+    });
+
+    // Add functionality for sliders, modals, or any other enhancements here
 });
 ```
