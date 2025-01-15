@@ -6,7 +6,7 @@ import schedule
 import time
 import socket
 
-# OpenAI API Key
+# OpenAI API Key (still requires filling in)
 openai.api_key = "your_openai_api_key"
 
 # Path to your GitHub repository
