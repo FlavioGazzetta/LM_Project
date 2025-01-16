@@ -4,7 +4,7 @@ import subprocess
 from openai import OpenAI
 
 # Initialize OpenAI client
-client = OpenAI(api_key="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")  # Replace with your actual API key
+client = OpenAI(api_key="")  # Replace with your actual API key
 
 # Configuration
 repo_path = r"C:\Users\User\Documents\LM_Project1\LM_Project\Book\Page_to_page"

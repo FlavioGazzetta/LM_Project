@@ -3,8 +3,13 @@ import time
 import subprocess
 from openai import OpenAI
 
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 # Initialize OpenAI client
-client = OpenAI(api_key="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")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Configuration
 repo_path = r"C:\Users\User\Documents\LM_Project1\LM_Project\Website"
