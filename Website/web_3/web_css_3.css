@@ -1,0 +1,133 @@
+```css
+/* General Styling */
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7; /* Adding a light background color */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow: hidden; /* Prevents content overflow */
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #555;
+}
+
+/* Navigation Bar */
+
+nav {
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav a {
+    color: #fff;
+    margin-right: 20px;
+    padding: 10px;
+    display: inline-block;
+}
+
+#menu-toggle {
+    display: block;
+}
+
+#menu {
+    display: flex;
+}
+
+/* Hero Section */
+
+section {
+    text-align: center;
+    background-image: url('path/to/your/image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+/* Featured Section */
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+}
+
+.carousel .slide {
+    min-width: 300px; /* Set minimum width for each slide */
+}
+
+.carousel img {
+    max-width: 100%;
+    height: auto; /* Ensure images don't stretch */
+}
+
+/* Footer */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer a {
+    color: #fff;
+    margin-right: 10px;
+}
+
+input[type="email"] {
+    padding: 5px;
+    border: none;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+
+@media screen and (max-width: 768px) {
+    #menu {
+        display: none;
+    }
+
+    #menu-toggle {
+        display: block;
+    }
+
+    .slide {
+        min-width: 200px; /* Adjust slide width for smaller screens */
+    }
+}
+```
+
+This CSS file includes styles for the provided website components such as the Navigation Bar, Hero Section, Featured Section, and Footer. It also incorporates responsive design considerations for better adaptability on various devices. Make sure to test the styles on different screen sizes to ensure proper alignment and readability. Feel free to customize the colors, sizes, and other properties to match your design preferences.
