@@ -5,67 +5,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css">
+    <title>Awesome Website</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        /* Custom styles can be added here */
+    </style>
 </head>
 
-<body class="font-sans">
+<body>
     <!-- Navigation Bar -->
-    <nav class="bg-gray-800 text-white fixed w-full z-10">
-        <div class="container mx-auto flex justify-between items-center py-4">
-            <div>
-                <a href="#" class="text-2xl font-bold">Your Website</a>
+    <nav class="bg-gray-800 text-white p-4 fixed top-0 w-full z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-lg font-bold">Awesome Website</div>
+            <div class="hidden md:flex space-x-4">
+                <a href="#" class="hover:underline">Home</a>
+                <a href="#" class="hover:underline">About</a>
+                <a href="#" class="hover:underline">Features</a>
+                <a href="#" class="hover:underline">Blog</a>
+                <a href="#" class="hover:underline">Contact</a>
             </div>
-            <div class="hidden md:flex">
-                <a href="#" class="mx-2">Home</a>
-                <a href="#" class="mx-2">About</a>
-                <a href="#" class="mx-2">Features</a>
-                <a href="#" class="mx-2">Blog</a>
-                <a href="#" class="mx-2">Contact</a>
-            </div>
-            <div class="md:hidden">
-                <button class="focus:outline-none">
-                    <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
+            <button class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="h-screen flex items-center justify-center bg-cover bg-center"
-        style="background-image: url('your-hero-image.jpg');">
-        <div class="text-center">
-            <h1 class="text-4xl font-bold text-white">Welcome to Your Website</h1>
-            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4">Learn More</button>
+    <section class="h-screen flex items-center">
+        <div class="container mx-auto flex flex-col items-center text-center">
+            <h1 class="text-4xl font-bold">Welcome to Awesome Website</h1>
+            <p class="text-lg my-4">Your one-stop solution for all your needs</p>
+            <button class="bg-blue-500 text-white px-6 py-2 rounded-full">Learn More</button>
         </div>
     </section>
 
-    <!-- Featured Section -->
-    <section class="container mx-auto my-8">
-        <!-- Insert Featured Content Here (e.g., Slider) -->
-    </section>
+    <!-- Main Content -->
+    <main>
+        <!-- Featured Section -->
+        <section class="py-12">
+            <div class="container mx-auto">
+                <!-- Featured Slider can be added here -->
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-gray-800 text-white p-4 mt-8">
         <div class="container mx-auto flex justify-between items-center">
+            <div>&copy; 2022 Awesome Website. All Rights Reserved.</div>
             <div>
-                <p>&copy; 2023 Your Website. All rights reserved.</p>
-            </div>
-            <div class="flex space-x-4">
-                <a href="#" class="text-white">Privacy Policy</a>
-                <a href="#" class="text-white">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
             </div>
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // Add JavaScript for functionality like collapsible navbar, sliders, etc.
-    </script>
+    <!-- Quick Access Icons -->
+    <div class="fixed top-4 right-4 flex space-x-4">
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+        </button>
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M6 16l-2 2m0 0l2-2m-2 2l2 2m-2-2l2-2m13-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path>
+            </svg>
+        </button>
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 3a1 1 0 0 1 1.74-.66l6 10a1 1 0 0 1-1.74.67l-3-5a1 1 0 0 1-.09-.13l-.22-.33-.1-.15-.15-.21a1 1 0 0 1-.09-.13l-3-6A1 1 0 0 1 10 3z"></path>
+            </svg>
+        </button>
+    </div>
+
 </body>
 
 </html>
