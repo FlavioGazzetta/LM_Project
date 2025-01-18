@@ -1,27 +1,71 @@
 ```javascript
-// JavaScript for Interactive Product Carousel Feature
-const productImages = ["product1.jpg", "product2.jpg", "product3.jpg"]; // Array of product images
+// Ensure initial requirements are met
 
-let currentImageIndex = 0; // Index to track the current image displayed
+document.addEventListener('DOMContentLoaded', function () {
+    // Add smooth scrolling to all links
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach((link) => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substr(1);
+            const targetElement = document.getElementById(targetId);
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
 
-const productImage = document.querySelector('.md.w-1/3 img');
-const productTitle = document.querySelector('.md.w-2/3 h3');
-const productDescription = document.querySelector('.md.w-2/3 p');
+    // Add active class to navbar link based on section in view
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', function () {
+        let current = '';
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 50) {
+                current = section.getAttribute('id');
+            }
+        });
+        const navLinks = document.querySelectorAll('.navbar-nav a');
+        navLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+});
 
-// Function to update the product details based on the current image index
-function updateProductDetails(index) {
-    productImage.src = productImages[index];
-    productTitle.textContent = `Product ${index + 1} Title`;
-    productDescription.textContent = `Product ${index + 1} Description`;
-}
+// Add new features
 
-// Initial product details display
-updateProductDetails(currentImageIndex);
+// 1. Add a sticky navbar that sticks to the top when scrolling
+window.addEventListener('scroll', function () {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 100) {
+        navbar.classList.add('sticky');
+    } else {
+        navbar.classList.remove('sticky');
+    }
+});
 
-// Button to view next product
-const nextButton = document.querySelector('.bg-blue-500');
-nextButton.addEventListener('click', () => {
-    currentImageIndex = (currentImageIndex + 1) % productImages.length;
-    updateProductDetails(currentImageIndex);
+// 2. Implement a light/dark mode toggle
+const toggleSwitch = document.createElement('input');
+toggleSwitch.setAttribute('type', 'checkbox');
+toggleSwitch.id = 'theme-switch';
+const label = document.createElement('label');
+label.setAttribute('for', 'theme-switch');
+label.textContent = 'Toggle Dark Mode';
+document.querySelector('.navbar').appendChild(toggleSwitch);
+document.querySelector('.navbar').appendChild(label);
+
+toggleSwitch.addEventListener('change', function () {
+    document.body.classList.toggle('dark-mode');
+});
+
+// 3. Implement a back-to-top button
+const backToTopBtn = document.createElement('button');
+backToTopBtn.textContent = 'Back to Top';
+backToTopBtn.classList.add('back-to-top-btn');
+document.body.appendChild(backToTopBtn);
+
+backToTopBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 ```
