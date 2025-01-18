@@ -1,126 +1,194 @@
-The provided CSS code has been updated and improved to align with the enhanced features and functionality of the website. The CSS enhancements include:
-
 ```css
-/* General Styling */
-
+/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #f7f7f7; /* Adding a light background color */
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    overflow: hidden; /* Prevents content overflow */
 }
 
 a {
-    color: #333;
     text-decoration: none;
-}
-
-a:hover {
-    color: #555;
+    color: inherit;
 }
 
 /* Navigation Bar */
-
 nav {
     background-color: #333;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-nav a {
-    color: #fff;
-    margin-right: 20px;
-    padding: 10px;
-    display: inline-block;
-}
-
-#menu-toggle {
-    display: block;
-}
-
-#menu {
+    color: white;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-right: 1rem;
+}
+
+nav button {
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
 }
 
 /* Hero Section */
-
-section {
-    text-align: center;
-    background-size: cover;
-    background-position: center;
+header {
+    background: url('path/to/your/image.jpg') center/cover;
     height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: #fff;
-}
-
-/* Featured Section */
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid layout */
-    gap: 20px; /* Add gap between grid items */
-}
-
-/* Footer */
-
-footer {
-    background-color: #333;
-    color: #fff;
+    align-items: center;
     text-align: center;
-    padding: 20px 0;
 }
 
-footer a {
-    color: #fff;
-    margin-right: 10px;
+header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1rem;
 }
 
-input[type="email"] {
-    padding: 5px;
-    border: none;
-}
-
-button {
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
+header button {
     background-color: #007bff;
-    color: #fff;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-button:hover {
+header button:hover {
     background-color: #0056b3;
 }
 
-/* Responsive Design */
+/* Featured Section */
+section {
+    padding: 2rem;
+}
 
-@media screen and (max-width: 768px) {
-    #menu {
-        display: none;
-    }
+section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
 
-    #menu-toggle {
-        display: block;
-    }
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 1rem 2rem;
+}
 
-    .grid {
-        grid-template-columns: 1fr; /* Adjust grid layout for smaller screens */
-    }
+footer ul {
+    display: flex;
+    list-style: none;
+}
+
+footer ul li {
+    margin-right: 1rem;
+}
+
+/* Dark Mode Toggle */
+#darkModeToggle {
+    display: none;
+}
+
+label[for="darkModeToggle"] {
+    color: white;
+    cursor: pointer;
+}
+
+/* Gamification Badges */
+.bg-yellow-400 {
+    display: block;
+    background-color: #ffc107;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bg-yellow-400:hover {
+    background-color: #ffca28;
+}
+
+/* Push Notifications */
+.bg-green-400 {
+    display: block;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bg-green-400:hover {
+    background-color: #66bb6a;
+}
+
+/* Interactive Product Carousel */
+section.bg-gray-300 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+section.bg-gray-300 h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+section.bg-gray-300 img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+section.bg-gray-300 .md.w-2/3 {
+    margin-left: 1rem;
+}
+
+section.bg-gray-300 h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+section.bg-gray-300 p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+section.bg-gray-300 button {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+section.bg-gray-300 button:hover {
+    background-color: #0056b3;
 }
 ```
-
-These CSS enhancements focus on improving the responsiveness, layout, and visual appeal of the website. Please integrate these updated styles into your CSS file to ensure a consistent and user-friendly design. If you have any specific preferences or further adjustments needed, feel free to let me know. I'm here to assist with any additional modifications or refinements.
+```
