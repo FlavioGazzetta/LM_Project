@@ -1,56 +1,27 @@
 ```javascript
-// Additional features and improvements
+// JavaScript for Interactive Product Carousel Feature
+const productImages = ["product1.jpg", "product2.jpg", "product3.jpg"]; // Array of product images
 
-// 1. Slider functionality
-const slider = document.getElementById('slider');
-const slides = [
-    { image: 'image1.jpg', title: 'Slide 1 Title', description: 'Slide 1 Description' },
-    { image: 'image2.jpg', title: 'Slide 2 Title', description: 'Slide 2 Description' },
-    { image: 'image3.jpg', title: 'Slide 3 Title', description: 'Slide 3 Description' }
-];
+let currentImageIndex = 0; // Index to track the current image displayed
 
-// Function to render slides in the slider
-function renderSlides() {
-    if (slider) {
-        slider.innerHTML = '';
-        slides.forEach(slide => {
-            const slideItem = document.createElement('div');
-            slideItem.classList.add('slide');
-            slideItem.innerHTML = `
-                <img src="${slide.image}" alt="${slide.title}">
-                <h2>${slide.title}</h2>
-                <p>${slide.description}</p>
-            `;
-            slider.appendChild(slideItem);
-        });
-    }
+const productImage = document.querySelector('.md.w-1/3 img');
+const productTitle = document.querySelector('.md.w-2/3 h3');
+const productDescription = document.querySelector('.md.w-2/3 p');
+
+// Function to update the product details based on the current image index
+function updateProductDetails(index) {
+    productImage.src = productImages[index];
+    productTitle.textContent = `Product ${index + 1} Title`;
+    productDescription.textContent = `Product ${index + 1} Description`;
 }
 
-renderSlides();
+// Initial product details display
+updateProductDetails(currentImageIndex);
 
-// 2. Subscribe to newsletter functionality
-const subscribeInput = document.querySelector('input[type="email"]');
-const subscribeBtn = document.querySelector('button');
-subscribeBtn.addEventListener('click', () => {
-    const email = subscribeInput.value;
-    if (email) {
-        alert(`Subscribed with email: ${email}`);
-        subscribeInput.value = '';
-    } else {
-        alert('Please enter a valid email address');
-    }
-});
-
-// 3. Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
+// Button to view next product
+const nextButton = document.querySelector('.bg-blue-500');
+nextButton.addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex + 1) % productImages.length;
+    updateProductDetails(currentImageIndex);
 });
 ```
-
-By incorporating the slider functionality, subscribing to the newsletter feature, and enabling smooth scrolling for anchor links, the website is now enhanced with additional interactive elements and user engagement. Test these features thoroughly to ensure they work as intended and provide a seamless browsing experience for visitors. Feel free to continue enhancing the website based on your project requirements or design preferences.
