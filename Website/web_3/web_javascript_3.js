@@ -1,71 +1,100 @@
 ```javascript
-// Ensure initial requirements are met
+// JavaScript to enhance website functionalities
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Add smooth scrolling to all links
-    const links = document.querySelectorAll('a[href^="#"]');
-    links.forEach((link) => {
-        link.addEventListener('click', function (e) {
+document.addEventListener("DOMContentLoaded", function() {
+    // Toggle mobile navigation menu
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    hamburger.addEventListener("click", function() {
+        navLinks.classList.toggle("active");
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href').substr(1);
-            const targetElement = document.getElementById(targetId);
-            targetElement.scrollIntoView({ behavior: 'smooth' });
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+                behavior: "smooth"
+            });
         });
     });
 
-    // Add active class to navbar link based on section in view
-    const sections = document.querySelectorAll('section');
-    window.addEventListener('scroll', function () {
-        let current = '';
-        sections.forEach((section) => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= sectionTop - 50) {
-                current = section.getAttribute('id');
-            }
-        });
-        const navLinks = document.querySelectorAll('.navbar-nav a');
-        navLinks.forEach((link) => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
-        });
+    // Implement dark mode toggle
+    const darkModeToggle = document.querySelector(".dark-mode-toggle");
+    darkModeToggle.addEventListener("click", function() {
+        document.body.classList.toggle("dark-mode");
     });
-});
 
-// Add new features
-
-// 1. Add a sticky navbar that sticks to the top when scrolling
-window.addEventListener('scroll', function () {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.classList.add('sticky');
-    } else {
-        navbar.classList.remove('sticky');
+    // Feature: Auto slideshow for the featured slider
+    let sliderIndex = 0;
+    function showSlides() {
+        const slides = document.querySelectorAll(".slider");
+        slides.forEach(slide => slide.style.display = "none");
+        sliderIndex++;
+        if (sliderIndex > slides.length) { sliderIndex = 1; }
+        slides[sliderIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000); // Change image every 3 seconds
     }
-});
+    showSlides();
 
-// 2. Implement a light/dark mode toggle
-const toggleSwitch = document.createElement('input');
-toggleSwitch.setAttribute('type', 'checkbox');
-toggleSwitch.id = 'theme-switch';
-const label = document.createElement('label');
-label.setAttribute('for', 'theme-switch');
-label.textContent = 'Toggle Dark Mode';
-document.querySelector('.navbar').appendChild(toggleSwitch);
-document.querySelector('.navbar').appendChild(label);
+    // Accessibility options
+    const accessibilityOptions = document.querySelector(".accessibility-options");
+    const textSizeButtons = document.createElement("div");
+    textSizeButtons.innerHTML = `
+        <button class="text-small">A-</button>
+        <button class="text-normal">A</button>
+        <button class="text-large">A+</button>
+    `;
+    accessibilityOptions.appendChild(textSizeButtons);
 
-toggleSwitch.addEventListener('change', function () {
-    document.body.classList.toggle('dark-mode');
-});
+    textSizeButtons.querySelector(".text-small").addEventListener("click", function() {
+        document.body.style.fontSize = "12px";
+    });
 
-// 3. Implement a back-to-top button
-const backToTopBtn = document.createElement('button');
-backToTopBtn.textContent = 'Back to Top';
-backToTopBtn.classList.add('back-to-top-btn');
-document.body.appendChild(backToTopBtn);
+    textSizeButtons.querySelector(".text-normal").addEventListener("click", function() {
+        document.body.style.fontSize = "16px";
+    });
 
-backToTopBtn.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    textSizeButtons.querySelector(".text-large").addEventListener("click", function() {
+        document.body.style.fontSize = "20px";
+    });
+
+    // Implement high-contrast mode toggle
+    const highContrastToggle = document.createElement("button");
+    highContrastToggle.textContent = "High Contrast";
+    accessibilityOptions.appendChild(highContrastToggle);
+
+    highContrastToggle.addEventListener("click", function() {
+        document.body.classList.toggle("high-contrast");
+    });
+
+    // FAQ section accordion functionality
+    const faqItems = document.querySelectorAll(".faq-item");
+    faqItems.forEach(item => {
+        item.addEventListener("click", function() {
+            this.classList.toggle("active");
+            const content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    });
+
+    // Keyboard navigation hints
+    const navLinksArray = Array.from(navLinks.querySelectorAll("a"));
+    navLinksArray.forEach((link, index) => {
+        link.setAttribute("tabindex", index + 1);
+    });
+
+    navLinksArray.forEach(link => {
+        link.addEventListener("focus", function() {
+            this.style.outline = "2px solid blue";
+        });
+        link.addEventListener("blur", function() {
+            this.style.outline = "none";
+        });
+    });
 });
 ```
