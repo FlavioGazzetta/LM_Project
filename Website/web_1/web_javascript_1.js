@@ -1,39 +1,29 @@
 ```javascript
-// Add JavaScript for collapsible menu and slider functionality
-// Collapsible menu
-const menuToggle = document.getElementById('menu-toggle');
-const menu = document.getElementById('menu');
-menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
+// Dark Mode Toggle
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+
+darkModeToggle.addEventListener('change', () => {
+    if (darkModeToggle.checked) {
+        body.classList.add('dark');
+    } else {
+        body.classList.remove('dark');
+    }
 });
 
-// Slider functionality
-const slider = document.getElementById('slider');
-const slides = ['Slide 1', 'Slide 2', 'Slide 3']; // Add your slide content here
+// Gamification Badges
+const badgesButton = document.querySelector('.bg-yellow-400');
 
-let currentSlide = 0;
+badgesButton.addEventListener('click', () => {
+    // Add functionality to earn badges here
+    alert('You earned a new badge!');
+});
 
-function showSlide(slideIndex) {
-    slider.innerHTML = slides[slideIndex];
-}
+// Push Notifications
+const notificationsButton = document.querySelector('.bg-green-400');
 
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}
-
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
-}
-
-// Show initial slide
-showSlide(currentSlide);
-
-// Optional: Add event listeners for next and previous buttons if provided in HTML
-// Example:
-// const nextButton = document.getElementById('next-button');
-// const prevButton = document.getElementById('prev-button');
-// nextButton.addEventListener('click', nextSlide);
-// prevButton.addEventListener('click', prevSlide);
+notificationsButton.addEventListener('click', () => {
+    // Add functionality to enable push notifications here
+    alert('Push notifications enabled!');
+});
 ```
