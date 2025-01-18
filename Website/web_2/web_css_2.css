@@ -1,134 +1,155 @@
 ```css
-/* General Styles */
+/* Custom CSS for styling the website */
 
+/* General Layout */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
 }
 
-h1 {
-    font-family: 'Times New Roman', serif;
-}
-
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* Navigation Bar */
-
 nav {
-    background-color: #333;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
-nav ul {
-    display: flex;
+  background-color: #333;
 }
 
 nav a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
 }
 
-.hamburger-menu {
-    display: none;
-}
-
-@media screen and (max-width: 768px) {
-    nav ul {
-        display: none;
-    }
-
-    nav .hamburger-menu {
-        display: block;
-        cursor: pointer;
-    }
-
-    nav ul.show {
-        display: flex;
-        flex-direction: column;
-        background-color: #333;
-        position: absolute;
-        top: 4rem;
-        left: 0;
-        right: 0;
-        padding: 1rem;
-    }
+nav button {
+  display: block;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
 }
 
 /* Hero Section */
-
-.hero {
-    background: url('hero-image.jpg') no-repeat center center/cover;
-    text-align: center;
-    padding: 4rem 0;
-    color: white;
+section {
+  text-align: center;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
-.hero button {
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.hero button:hover {
-    background-color: #0056b3;
+button:hover {
+  background-color: #0056b3;
 }
 
-/* Quick Access Icons */
-
-.quick-icons {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-}
-
-.quick-icons img {
-    width: 30px;
-    margin-left: 1rem;
-}
-
-/* Featured Section */
-
-.featured-slider {
-    /* Styling for the featured slider */
+/* Featured Section Slider (Placeholder) */
+.slider {
+  font-size: 2rem;
+  font-weight: 700;
+  background-color: #fff;
+  padding: 20px;
+  margin: 10px auto;
+  max-width: 600px;
 }
 
 /* Footer */
-
 footer {
-    background-color: #f8f9fa;
-    padding: 2rem 0;
-    text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
 }
 
-/* Additional Styling */
+footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-/* Add styles for user account management, content management, e-commerce features, search functionality, interactive features, analytics, SEO optimization, and accessibility features as required */
+footer li {
+  display: inline;
+}
 
-/* Technology Stack */
+footer input {
+  padding: 5px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  margin-right: 10px;
+}
 
-/* Styling for frontend, backend, hosting details */
+footer button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-/* Extra Features */
+footer button:hover {
+  background-color: #0056b3;
+}
 
-/* Dark mode toggle, gamification, push notifications, multilingual support styles */
+/* Additional Features */
+
+/* Dark Mode Toggle */
+body.dark-mode {
+  background-color: #232323;
+  color: #fff;
+}
+
+/* Gamification - Badges */
+.badge {
+  display: inline-block;
+  background-color: #f44336;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+/* Push Notification Icon */
+.notification-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.notification-icon:hover {
+  background-color: #0056b3;
+}
+
+/* Multilingual Support Dropdown */
+.language-dropdown {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.language-dropdown:hover {
+  background-color: #555;
+}
 ```
