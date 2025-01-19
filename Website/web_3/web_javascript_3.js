@@ -1,100 +1,73 @@
 ```javascript
-// JavaScript to enhance website functionalities
+// JavaScript to Enhance Website Functionality
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Toggle mobile navigation menu
-    const hamburger = document.querySelector(".hamburger");
-    const navLinks = document.querySelector(".nav-links");
-    hamburger.addEventListener("click", function() {
-        navLinks.classList.toggle("active");
+// Function to toggle the mobile menu visibility
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+});
+
+// Function to initiate Swiper.js for featured section slider
+document.addEventListener('DOMContentLoaded', function() {
+    new Swiper('.swiper-container', {
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
     });
+});
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function(e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute("href")).scrollIntoView({
-                behavior: "smooth"
-            });
+// Feature: Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
         });
     });
+});
 
-    // Implement dark mode toggle
-    const darkModeToggle = document.querySelector(".dark-mode-toggle");
-    darkModeToggle.addEventListener("click", function() {
-        document.body.classList.toggle("dark-mode");
-    });
+// Feature: Form validation feedback
+const form = document.querySelector('form');
+form.addEventListener('submit', function(event) {
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const message = document.getElementById('message');
 
-    // Feature: Auto slideshow for the featured slider
-    let sliderIndex = 0;
-    function showSlides() {
-        const slides = document.querySelectorAll(".slider");
-        slides.forEach(slide => slide.style.display = "none");
-        sliderIndex++;
-        if (sliderIndex > slides.length) { sliderIndex = 1; }
-        slides[sliderIndex - 1].style.display = "block";
-        setTimeout(showSlides, 3000); // Change image every 3 seconds
+    if (!name.value || !email.value || !message.value) {
+        event.preventDefault();
+        alert('Please fill out all fields.');
     }
-    showSlides();
+});
 
-    // Accessibility options
-    const accessibilityOptions = document.querySelector(".accessibility-options");
-    const textSizeButtons = document.createElement("div");
-    textSizeButtons.innerHTML = `
-        <button class="text-small">A-</button>
-        <button class="text-normal">A</button>
-        <button class="text-large">A+</button>
-    `;
-    accessibilityOptions.appendChild(textSizeButtons);
+// Feature: Back to top button
+const backToTopButton = document.createElement('button');
+backToTopButton.innerText = '↑';
+backToTopButton.className = 'fixed bottom-4 right-4 p-2 bg-indigo-600 text-white rounded-full hidden';
+document.body.appendChild(backToTopButton);
 
-    textSizeButtons.querySelector(".text-small").addEventListener("click", function() {
-        document.body.style.fontSize = "12px";
-    });
+backToTopButton.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
-    textSizeButtons.querySelector(".text-normal").addEventListener("click", function() {
-        document.body.style.fontSize = "16px";
-    });
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 300) {
+        backToTopButton.classList.remove('hidden');
+    } else {
+        backToTopButton.classList.add('hidden');
+    }
+});
 
-    textSizeButtons.querySelector(".text-large").addEventListener("click", function() {
-        document.body.style.fontSize = "20px";
-    });
+// Feature: Dark mode toggle
+const darkModeToggle = document.createElement('button');
+darkModeToggle.innerText = '🌙';
+darkModeToggle.className = 'fixed top-4 right-4 p-2 bg-gray-200 text-gray-800 rounded-full';
+document.body.appendChild(darkModeToggle);
 
-    // Implement high-contrast mode toggle
-    const highContrastToggle = document.createElement("button");
-    highContrastToggle.textContent = "High Contrast";
-    accessibilityOptions.appendChild(highContrastToggle);
-
-    highContrastToggle.addEventListener("click", function() {
-        document.body.classList.toggle("high-contrast");
-    });
-
-    // FAQ section accordion functionality
-    const faqItems = document.querySelectorAll(".faq-item");
-    faqItems.forEach(item => {
-        item.addEventListener("click", function() {
-            this.classList.toggle("active");
-            const content = this.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    });
-
-    // Keyboard navigation hints
-    const navLinksArray = Array.from(navLinks.querySelectorAll("a"));
-    navLinksArray.forEach((link, index) => {
-        link.setAttribute("tabindex", index + 1);
-    });
-
-    navLinksArray.forEach(link => {
-        link.addEventListener("focus", function() {
-            this.style.outline = "2px solid blue";
-        });
-        link.addEventListener("blur", function() {
-            this.style.outline = "none";
-        });
-    });
+darkModeToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark');
+    document.body.classList.toggle('bg-gray-800');
+    document.body.classList.toggle('text-white');
 });
 ```
