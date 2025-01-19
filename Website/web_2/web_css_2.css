@@ -1,223 +1,163 @@
 ```css
-/* General Styles */
+/* Global Styles */
 body {
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9; /* Light background for readability */
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #f7f9fc; /* Slightly off-white for better readability */
+    color: #333; /* Dark gray text for contrast */
+    font-family: 'Sans-serif'; /* Sans-serif font for body text */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions for theme changes */
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Merriweather', serif;
-    margin: 0;
-    color: #222; /* Darker color for headings */
-}
-
-/* Hero Section */
-.hero {
-    background: url('hero-image.jpg') no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
-}
-
-.hero button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    background-color: #007BFF;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.hero button:hover {
-    background-color: #0056b3; /* Button hover effect */
+    font-family: 'Serif'; /* Serif font for headings */
+    margin-bottom: 0.5em; /* Consistent spacing below headings */
 }
 
 /* Navigation Bar */
 nav {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #ffffff; /* White background for nav */
+    color: #333333; /* Dark text for good contrast */
+    z-index: 1000; /* Ensure it stays on top of other content */
+    border-bottom: 1px solid #e5e7eb; /* Subtle bottom border */
 }
 
-nav .logo {
-    font-weight: bold;
-    font-size: 1.2em;
+nav a {
+    color: inherit; /* Inherit color for links */
+    padding: 1em; /* Uniform padding for clickable area */
+    text-decoration: none; /* Remove underlines */
+    transition: color 0.3s; /* Smooth hover effect */
 }
 
-nav .hamburger {
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
+nav a:hover {
+    color: #2563eb; /* Bright blue on hover */
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
+/* Quick Access Icons */
+nav .flex.items-center.space-x-3 a {
+    padding: 0.5em; /* Smaller padding for icons */
 }
 
-nav ul li {
-    margin: 0 10px;
+/* Hero Section */
+header {
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    color: #ffffff; /* White text for contrast on dark overlay */
+    text-align: center; /* Center align text */
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
+header h1 {
+    font-size: 2.5em; /* Large hero headline */
+    line-height: 1.2; /* Tight line height for a bold look */
 }
 
-nav ul li a:hover {
-    color: #007BFF; /* Link hover effect */
+header button {
+    background-color: #2563eb; /* Blue background for CTA */
+    border: none; /* Remove default button border */
+    border-radius: 0.5em; /* Rounded corners */
+    padding: 0.75em 1.5em; /* Padding for touch targets */
+    transition: transform 0.2s, background-color 0.3s; /* Smooth hover effects */
 }
 
-nav .quick-icons {
-    display: flex;
-    align-items: center;
-}
-
-nav .quick-icons i {
-    margin-left: 15px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-nav .quick-icons i:hover {
-    color: #007BFF;
+header button:hover {
+    background-color: #1e40af; /* Darker blue on hover */
 }
 
 /* Featured Section */
-.featured {
-    padding: 50px 0;
-    text-align: center;
-    background-color: #fff; /* Distinct background for section */
+section {
+    background-color: #ffffff; /* White background for contrast */
+    padding: 2em 0; /* Vertical padding */
 }
 
-.featured h2 {
-    margin-bottom: 20px;
+section h2 {
+    color: #1f2937; /* Darker heading for readability */
+    margin-bottom: 1em; /* Space below */
 }
 
-.featured-slider {
-    width: 80%;
-    margin: 0 auto;
-    overflow-x: scroll;
-    display: flex;
-    padding: 20px 0;
+.flex.overflow-x-scroll {
+    display: flex; /* Flex layout for slider */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 1em; /* Space between items */
 }
 
-.featured-slider div {
-    min-width: 300px;
-    margin: 0 10px;
-    background-color: #eee;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+.flex.overflow-x-scroll div {
+    background-color: #e5e7eb; /* Light gray background */
+    border-radius: 0.5em; /* Rounded corners */
+    flex: 0 0 30%; /* Custom width for slider items */
+    transition: transform 0.3s; /* Smooth scaling effect */
 }
 
-.featured-slider div:hover {
-    transform: scale(1.05); /* Slight zoom on hover */
+.flex.overflow-x-scroll div:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 /* Footer */
 footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+    background-color: #1f2937; /* Dark background for footer */
+    color: #d1d5db; /* Light gray text */
+}
+
+footer h3 {
+    color: #ffffff; /* White text for headings */
+    margin-bottom: 0.5em; /* Space below */
 }
 
 footer a {
-    color: #007BFF;
-    text-decoration: none;
-    transition: color 0.3s ease;
+    color: inherit; /* Inherit color for links */
+    text-decoration: none; /* Remove underlines */
 }
 
 footer a:hover {
-    color: #0056b3;
+    text-decoration: underline; /* Underline on hover */
 }
 
-footer .legal {
-    margin: 10px 0;
+footer input[type=email] {
+    background-color: #e5e7eb; /* Light gray for input background */
+    border: none; /* Remove borders */
+    border-radius: 0.5em; /* Rounded corners */
+    padding: 0.5em; /* Padding for touch targets */
 }
 
-footer .newsletter input[type="email"] {
-    padding: 10px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
+footer button {
+    background-color: #2563eb; /* Blue for call-to-action */
+    border: none; /* Remove default button border */
+    border-radius: 0.5em; /* Rounded corners */
+    padding: 0.5em 1em; /* Padding for touch targets */
+    transition: background-color 0.3s; /* Smooth hover effect */
 }
 
-footer .newsletter button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-footer .newsletter button:hover {
-    background-color: #0056b3;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    nav ul {
-        display: none;
-        flex-direction: column;
-        background-color: #333;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        width: 100%;
-    }
-
-    nav ul.show {
-        display: flex;
-    }
-
-    nav .hamburger {
-        display: block;
-    }
+footer button:hover {
+    background-color: #1e40af; /* Darker blue on hover */
 }
 
 /* Dark Mode */
 .dark-mode {
-    background-color: #222;
-    color: #ddd;
+    background-color: #121212; /* Dark background for dark mode */
+    color: #bcbcbc; /* Light gray text for dark mode */
 }
 
 .dark-mode nav {
-    background-color: #222;
+    background-color: #1f1f1f; /* Darker nav background */
 }
 
 .dark-mode footer {
-    background-color: #222;
+    background-color: #1a1a1a; /* Dark footer background */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav a {
+        display: block; /* Stack links vertically */
+        padding: 0.75em; /* Adjust padding for smaller displays */
+    }
+
+    .flex.overflow-x-scroll div {
+        flex: 0 0 80%; /* Wider slider items on mobile */
+    }
+}
+
+@media (min-width: 768px) {
+    nav .md\\:block {
+        display: block !important; /* Ensure correct display on larger screens */
+    }
 }
 ```
