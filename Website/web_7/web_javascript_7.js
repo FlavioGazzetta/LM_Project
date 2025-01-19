@@ -1,77 +1,95 @@
 ```javascript
-// JavaScript code to enhance functionality of the website
+// JavaScript to enhance the HTML functionality
 
-// 1. Design and Layout Enhancements
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('mouseover', () => {
-        link.style.color = 'blue'; // Change color on hover
-    });
-    link.addEventListener('mouseout', () => {
-        link.style.color = 'black'; // Reset color on mouseout
-    });
-});
-
-document.querySelectorAll('.btn, img').forEach(element => {
-    element.addEventListener('mouseover', () => {
-        element.style.transition = 'transform 0.3s ease'; // Add transform animation on hover
-        element.style.transform = 'scale(1.1)'; // Scale up on hover
-    });
-    element.addEventListener('mouseout', () => {
-        element.style.transform = 'scale(1)'; // Reset scale on mouseout
-    });
-});
-
-// 2. Features and Functionality Enhancements
-window.addEventListener('load', () => {
-    document.querySelectorAll('img').forEach(img => {
-        img.setAttribute('loading', 'lazy'); // Lazy load images
-    });
-});
-
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
+document.addEventListener('DOMContentLoaded', () => {
+    // // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
     
-    let currentSection = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 50;
-        const sectionHeight = section.clientHeight;
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-            currentSection = section.id;
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // // Initialize Swiper for the featured section
+    const swiper = new Swiper('.swiper-container', {
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        autoplay: {
+            delay: 5000,
+        },
+    });
+
+    // // Form validation for the contact form
+    const contactForm = document.querySelector('form');
+    contactForm.addEventListener('submit', (event) => {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        
+        if (name === '' || email === '') {
+            alert('Please fill out all fields.');
+            event.preventDefault();
+        } else {
+            // Simple email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                event.preventDefault();
+            }
         }
     });
+
+    // // Smooth scrolling for navigation links
+    const smoothLinks = document.querySelectorAll('a[href^="#"]');
+    smoothLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            window.scrollTo({
+                top: targetElement.offsetTop - 80, // Adjust for fixed header
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // // Add fade-in animation to all sections on scroll
+    const animateOnScroll = () => {
+        const sections = document.querySelectorAll('section');
+        const triggerBottom = window.innerHeight / 5 * 4; // Adjust trigger point
+        
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop < triggerBottom) {
+                section.classList.add('animate-fade-in');
+            } else {
+                section.classList.remove('animate-fade-in');
+            }
+        });
+    };
     
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.classList.contains(currentSection)) {
-            link.classList.add('active'); // Highlight active section in navigation
-        }
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Initialize on page load
+
+    // // Feature: Night mode toggle
+    const toggleNightMode = () => {
+        document.body.classList.toggle('bg-gray-800');
+        document.body.classList.toggle('text-white');
+    };
+    
+    const nightModeButton = document.createElement('button');
+    nightModeButton.innerHTML = '<i class="fas fa-moon"></i>';
+    nightModeButton.className = 'fixed bottom-4 right-4 p-2 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700';
+    nightModeButton.addEventListener('click', toggleNightMode);
+    
+    document.body.appendChild(nightModeButton);
+
+    // // Accessibility: Add aria-expanded to menu toggle button
+    menuToggle.addEventListener('click', () => {
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+        menuToggle.setAttribute('aria-expanded', !expanded);
     });
 });
-
-// 3. SEO Optimization Enhancements
-document.querySelectorAll('img').forEach(img => {
-    img.alt = 'Image description'; // Add alt attribute for accessibility
-});
-
-// 4. Accessibility Enhancements
-document.addEventListener('keydown', event => {
-    if (event.key === 'Tab') {
-        document.body.classList.add('keyboard-navigation'); // Apply keyboard focus style
-    }
-});
-document.addEventListener('mousedown', () => {
-    document.body.classList.remove('keyboard-navigation'); // Remove keyboard focus style
-});
-
-// 5. Performance Enhancements
-// Minify and concatenate CSS and JavaScript files for improved loading times
-// Utilize browser caching and CDN services for optimized content delivery
-
-// Additional Enhancements:
-// - Implement smooth scrolling for anchor links
-// - Add a light/dark mode toggle for better user customization
-// - Include a form validation feature for user input fields
-
-// Feel free to reach out for any further enhancements or modifications.
 ```
