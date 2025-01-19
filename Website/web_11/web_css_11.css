@@ -1,125 +1,227 @@
-CSS:
 ```css
-/* General Styling */
-
+/* Global Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Nunito', sans-serif;
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f7f7f7; /* Light background color */
+    transition: color 0.3s ease, background-color 0.3s ease;
+    background-color: #f0f4f8; /* Light gray background */
+    color: #333; /* Dark grey text color */
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    overflow: hidden; /* Prevent content overflow */
-}
-
-a {
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', serif;
     color: #333;
-    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-a:hover {
-    color: #555;
-}
-
-/* Navigation Bar */
-
-nav {
-    background-color: #333;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
+/* Navbar Styles */
+header {
+    background: rgba(255, 255, 255, 0.9);
+    transition: background 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 nav a {
-    color: #fff;
-    margin-right: 20px;
-    padding: 10px;
-    display: inline-block;
+    color: #333;
+    text-decoration: none;
+    padding: 5px;
+    transition: color 0.3s ease;
 }
 
-#menu-toggle {
-    display: block;
+nav a:hover {
+    color: #4f46e5; /* Indigo color */
 }
 
-#menu {
-    display: flex;
+/* Quick Access Icons */
+header .flex a {
+    transition: color 0.3s ease;
+}
+
+header .flex a:hover {
+    color: #4f46e5;
 }
 
 /* Hero Section */
-
-section {
-    text-align: center;
+#hero {
     background-size: cover;
     background-position: center;
-    height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+#hero h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    animation: textFadeIn 1s ease-out;
+}
+
+@keyframes textFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 /* Featured Section */
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid layout */
-    gap: 20px; /* Add gap between grid items */
-}
-
-/* Footer */
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
+#featured .swiper-container {
+    width: 100%;
     padding: 20px 0;
 }
 
-footer a {
+#featured h2 {
+    color: #4f46e5;
+}
+
+/* Services/Features */
+#features h2 {
+    color: #4f46e5;
+}
+
+#features .bg-white {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#features .bg-white:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* About Section */
+#about h2 {
+    color: #4f46e5;
+}
+
+/* Blog/News Section */
+#blog h2 {
+    color: #4f46e5;
+}
+
+#blog a {
+    color: #4f46e5;
+}
+
+#blog a:hover {
+    text-decoration: underline;
+}
+
+/* Contact Section */
+#contact h2 {
+    color: #4f46e5;
+}
+
+form input, form textarea {
+    border: 1px solid #ddd;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #4f46e5;
+}
+
+/* Button Styles */
+button, a.button {
+    background-color: #4f46e5;
     color: #fff;
-    margin-right: 10px;
-}
-
-input[type="email"] {
-    padding: 5px;
+    padding: 10px 20px;
     border: none;
-}
-
-button {
-    padding: 5px 10px;
-    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+button:hover, a.button:hover {
+    background-color: #4338ca; /* Slightly darker indigo */
 }
 
-/* Responsive Design */
+/* Footer Styles */
+footer {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 20px 0;
+    text-align: center;
+}
 
-@media screen and (max-width: 768px) {
-    #menu {
+footer a {
+    color: #4f46e5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    nav ul {
         display: none;
     }
+}
 
-    #menu-toggle {
-        display: block;
-    }
+/* Fade-in Animations */
+.fade-in {
+    opacity: 1 !important;
+}
 
-    .grid {
-        grid-template-columns: 1fr; /* Adjust grid layout for smaller screens */
-    }
+.opacity-0 {
+    opacity: 0;
+}
+
+.transition-opacity {
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Dark Mode Styles */
+body.dark {
+    background-color: #1a202c;
+    color: #cbd5e0;
+}
+
+body.dark h1, body.dark h2, body.dark h3, body.dark h4, body.dark h5, body.dark h6 {
+    color: #e2e8f0;
+}
+
+body.dark a {
+    color: #63b3ed;
+}
+
+body.dark a:hover {
+    color: #4299e1;
+}
+
+body.dark header, body.dark footer {
+    background: rgba(30, 30, 30, 0.9);
+    color: #e2e8f0;
+}
+
+body.dark button, body.dark a.button {
+    background-color: #2b6cb0;
+}
+
+body.dark button:hover, body.dark a.button:hover {
+    background-color: #2c5282;
+}
+
+/* Back to Top Button */
+.fixed.bottom-4.right-4 {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.fixed.bottom-4.right-4.show {
+    opacity: 1;
 }
 ```
 
-With these CSS enhancements, the website now has a consistent and visually appealing design that adapts well to different screen sizes. If you have any more requirements or need further modifications, feel free to let me know. I'm here to assist you in creating a top-notch website that meets all your needs.
+This CSS provides a comprehensive and aesthetically pleasing style for your website, ensuring responsiveness, accessibility, and a modern look. It includes enhancements like dark mode, interactive elements, and a back-to-top button for improved navigation. Keep iterating and refining based on user feedback for optimal results.
