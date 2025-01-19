@@ -1,228 +1,177 @@
 ```css
-/* Custom styling for the website */
-
+/* Global Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    margin: 0;
-    padding: 0;
+    background-color: #f7f9fc; /* Slightly off-white for better readability */
+    color: #333; /* Dark gray text for contrast */
+    font-family: 'Sans-serif'; /* Sans-serif font for body text */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transitions for theme changes */
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Serif'; /* Serif font for headings */
+    margin-bottom: 0.5em; /* Consistent spacing below headings */
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
+/* Navigation Bar */
 nav {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
+    background-color: #ffffff; /* White background for nav */
+    color: #333333; /* Dark text for good contrast */
+    z-index: 1000; /* Ensure it stays on top of other content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: top 0.3s; /* Smooth transition for navbar hiding/showing */
+    border-bottom: 1px solid #e5e7eb; /* Subtle bottom border */
 }
 
 nav a {
-    margin-right: 20px;
+    color: inherit; /* Inherit color for links */
+    padding: 1em; /* Uniform padding for clickable area */
+    text-decoration: none; /* Remove underlines */
+    transition: color 0.3s; /* Smooth hover effect */
 }
 
-nav button {
-    display: block;
-    background: transparent;
-    border: none;
-    color: white;
+nav a:hover {
+    color: #2563eb; /* Bright blue on hover */
 }
 
+/* Quick Access Icons */
+nav .flex.items-center.space-x-3 a {
+    padding: 0.5em; /* Smaller padding for icons */
+}
+
+/* Hero Section */
+header {
+    display: flex; /* Flexbox for centering content */
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    color: #ffffff; /* White text for contrast on dark overlay */
+    text-align: center; /* Center align text */
+}
+
+header h1 {
+    font-size: 2.5em; /* Large hero headline */
+    line-height: 1.2; /* Tight line height for a bold look */
+}
+
+header button {
+    background-color: #2563eb; /* Blue background for CTA */
+    border: none; /* Remove default button border */
+    border-radius: 0.5em; /* Rounded corners */
+    padding: 0.75em 1.5em; /* Padding for touch targets */
+    transition: transform 0.2s, background-color 0.3s; /* Smooth hover effects */
+}
+
+header button:hover {
+    background-color: #1e40af; /* Darker blue on hover */
+}
+
+/* Featured Section */
 section {
-    padding: 20px;
+    background-color: #ffffff; /* White background for contrast */
+    padding: 2em 0; /* Vertical padding */
 }
 
-.hero-section {
-    background-image: url('path/to/image.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
+section h2 {
+    color: #1f2937; /* Darker heading for readability */
+    margin-bottom: 1em; /* Space below */
 }
 
-.hero-section h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+.flex.overflow-x-scroll {
+    display: flex; /* Flex layout for slider */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    gap: 1em; /* Space between items */
 }
 
-.hero-section button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.flex.overflow-x-scroll div {
+    background-color: #e5e7eb; /* Light gray background */
+    border-radius: 0.5em; /* Rounded corners */
+    flex: 0 0 30%; /* Custom width for slider items */
+    transition: transform 0.3s; /* Smooth scaling effect */
 }
 
-.quick-access-icons {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.flex.overflow-x-scroll div:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-.quick-access-icons i {
-    margin-right: 10px;
-}
-
-.featured-section {
-    margin-top: 20px;
-}
-
-.slider {
-    display: flex;
-    overflow: hidden;
-}
-
-.slider-item {
-    display: none;
-}
-
-.slider-item img {
-    width: 100%;
-}
-
-.slider-controls {
-    margin-top: 10px;
-}
-
-.slider-controls button {
-    padding: 5px;
-    margin-right: 10px;
-}
-
+/* Footer */
 footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
+    background-color: #1f2937; /* Dark background for footer */
+    color: #d1d5db; /* Light gray text */
+}
+
+footer h3 {
+    color: #ffffff; /* White text for headings */
+    margin-bottom: 0.5em; /* Space below */
 }
 
 footer a {
-    color: white;
+    color: inherit; /* Inherit color for links */
+    text-decoration: none; /* Remove underlines */
 }
 
-footer .flex {
-    justify-content: space-between;
+footer a:hover {
+    text-decoration: underline; /* Underline on hover */
 }
 
+footer input[type=email] {
+    background-color: #e5e7eb; /* Light gray for input background */
+    border: none; /* Remove borders */
+    border-radius: 0.5em; /* Rounded corners */
+    padding: 0.5em; /* Padding for touch targets */
+}
+
+footer button {
+    background-color: #2563eb; /* Blue for call-to-action */
+    border: none; /* Remove default button border */
+    border-radius: 0.5em; /* Rounded corners */
+    padding: 0.5em 1em; /* Padding for touch targets */
+    transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+footer button:hover {
+    background-color: #1e40af; /* Darker blue on hover */
+}
+
+/* Dark Mode */
 .dark-mode {
-    background-color: #333;
-    color: white;
+    background-color: #121212; /* Dark background for dark mode */
+    color: #bcbcbc; /* Light gray text for dark mode */
 }
 
-.back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.dark-mode nav {
+    background-color: #1f1f1f; /* Darker nav background */
 }
 
+.dark-mode footer {
+    background-color: #1a1a1a; /* Dark footer background */
+}
+
+.dark-mode header {
+    background-color: #1a1a1a; /* Dark background for header */
+}
+
+.dark-mode header button {
+    background-color: #333; /* Darker button in dark mode */
+}
+
+.dark-mode header button:hover {
+    background-color: #444; /* Slightly lighter hover in dark mode */
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    nav div {
-        display: none;
+    nav a {
+        display: block; /* Stack links vertically */
+        padding: 0.75em; /* Adjust padding for smaller displays */
     }
 
-    nav button {
-        display: block;
-    }
-
-    nav button i {
-        font-size: 1.5rem;
-    }
-
-    nav div.hidden {
-        display: flex;
-    }
-
-    .slider {
-        flex-direction: column;
+    .flex.overflow-x-scroll div {
+        flex: 0 0 80%; /* Wider slider items on mobile */
     }
 }
 
-@media (max-width: 576px) {
-    .hero-section h1 {
-        font-size: 2rem;
+@media (min-width: 768px) {
+    nav .md\\:block {
+        display: block !important; /* Ensure correct display on larger screens */
     }
-
-    .hero-section button {
-        padding: 8px 16px;
-    }
-}
-
-/* Additional Improvements */
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    /* Update styling for tablets */
-}
-
-@media (max-width: 768px) {
-    /* Update styling for smaller tablets */
-}
-
-@media (max-width: 576px) {
-    /* Update styling for smartphones */
-}
-
-/* Typography */
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-}
-
-h1 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 2.5rem;
-}
-
-h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 2rem;
-}
-
-p {
-    font-family: 'Arial', sans-serif;
-    font-size: 1rem;
-}
-
-/* Button Styles */
-button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Color Scheme */
-:root {
-    --primary-color: #007bff;
-    --secondary-color: #0056b3;
-    --accent-color: #f8f9fa;
-}
-
-body {
-    --background-color: #f5f5f5;
-    --text-color: #333;
 }
 ```
