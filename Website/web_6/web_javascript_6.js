@@ -1,69 +1,82 @@
-I'm glad to see you're interested in enhancing the functionality of the website further. Here's the JavaScript code that includes the initial requirements along with the new features you've requested:
-
 ```javascript
-// JavaScript Code with Additional Enhancements
+        // Enhanced Feature: Animate Navigation Bar on Scroll
+        const navbar = document.querySelector('nav');
+        let lastScrollTop = 0;
 
-// Smooth Scrolling for Internal Anchor Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-            const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY;
-            
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.scrollY;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                navbar.style.top = '-100px'; // Hide navbar
+            } else {
+                navbar.style.top = '0'; // Show navbar
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // New Feature: Lazy Load Images
+        const lazyLoadImages = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    observer.unobserve(img);
+                }
             });
+        });
+
+        lazyLoadImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // New Feature: Form Validation for Newsletter Subscription
+        const newsletterForm = document.querySelector('footer form');
+        newsletterForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const emailInput = newsletterForm.querySelector('input[type="email"]');
+            const emailValue = emailInput.value;
+
+            if (!validateEmail(emailValue)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+            alert('Subscribed successfully!');
+            emailInput.value = ''; // Clear the input field
+        });
+
+        function validateEmail(email) {
+            const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            return re.test(String(email).toLowerCase());
         }
-    });
-});
 
-// Interactive Form Validation
-document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const emailInput = form.querySelector('input[type="email"]');
-        const emailValue = emailInput.value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (emailRegex.test(emailValue)) {
-            alert('Form submitted successfully!');
-            form.reset();
-        } else {
-            alert('Please enter a valid email address.');
+        // New Feature: Animated Scroll for Anchor Links
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+        anchorLinks.forEach(anchor => {
+            anchor.addEventListener('click', (event) => {
+                event.preventDefault();
+                const targetId = anchor.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // New Feature: Typewriter Effect in Hero Headline
+        const heroHeadline = document.querySelector('header h1');
+        const heroText = heroHeadline.textContent;
+        heroHeadline.textContent = '';
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < heroText.length) {
+                heroHeadline.textContent += heroText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            }
         }
-    });
-});
 
-// Additional Functionality for A/B Testing or Server-Side Rendering will require backend implementation
-
-// Example of A/B Testing for Button Color
-const testButtonColor = () => {
-    const button = document.querySelector('.test-button');
-    const randomColor = Math.floor(Math.random()*16777215).toString(16);
-    
-    button.style.backgroundColor = `#${randomColor}`;
-};
-
-// Example of Server-Side Rendering Implementation
-// This is a placeholder function as server-side rendering requires backend setup
-const serverSideRender = () => {
-    // Placeholder function for server-side rendering
-    console.log('Server-Side Rendering completed.');
-};
-
-// Call the A/B Testing Function
-testButtonColor();
-
-// Call the Server-Side Rendering Function
-serverSideRender();
+        typeWriter();
 ```
-
-This JavaScript code includes the smooth scrolling functionality for internal anchor links and interactive form validation. It also provides examples of how A/B Testing and Server-Side Rendering can be implemented, although the latter requires backend setup.
-
-Remember to integrate these enhancements carefully and test thoroughly to ensure they work as intended. If you have any more specific requirements or need further assistance, feel free to ask!
