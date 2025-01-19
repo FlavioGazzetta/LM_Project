@@ -1,46 +1,66 @@
 ```javascript
-// JavaScript code to enhance functionality of the HTML
+            // Continue to showSliderItem logic
+            item, i) => {
+                item.style.transform = `translateX(${(i - index) * 100}%)`;
+                item.style.transition = 'transform 0.5s ease-in-out';
+            });
+        }
 
-// Requirement 1: Add a click event listener to the button element
-const button = document.querySelector('#myButton');
-button.addEventListener('click', function() {
-  alert('Button clicked!');
-});
+        function autoSlide() {
+            sliderIndex = (sliderIndex + 1) % sliderItems.length;
+            showSliderItem(sliderIndex);
+        }
 
-// Requirement 2: Change the text content of the heading element
-const heading = document.querySelector('h1');
-heading.textContent = 'Updated Heading Text';
+        setInterval(autoSlide, 3000);
 
-// Requirement 3: Toggle a class on the second paragraph element
-const paragraph = document.querySelectorAll('p')[1];
-paragraph.addEventListener('click', function() {
-  this.classList.toggle('highlighted');
-});
+        // Newsletter Form Validation
+        const newsletterForm = document.querySelector('footer form');
+        const emailInput = newsletterForm.querySelector('input[type="email"]');
 
-// New Feature 1: Change background color on hover for all paragraph elements
-const paragraphs = document.querySelectorAll('p');
-paragraphs.forEach(paragraph => {
-  paragraph.addEventListener('mouseover', function() {
-    this.style.backgroundColor = 'lightblue';
-  });
-  paragraph.addEventListener('mouseout', function() {
-    this.style.backgroundColor = 'white';
-  });
-});
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailValue = emailInput.value.trim();
+            if (validateEmail(emailValue)) {
+                alert('Thank you for subscribing!');
+                emailInput.value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
 
-// New Feature 2: Hide and show the image element on button click
-const image = document.querySelector('img');
-button.addEventListener('click', function() {
-  if (image.style.display === 'none') {
-    image.style.display = 'block';
-  } else {
-    image.style.display = 'none';
-  }
-});
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
 
-// New Feature 3: Change font size of the heading element on double click
-heading.addEventListener('dblclick', function() {
-  const currentSize = parseInt(window.getComputedStyle(this).fontSize);
-  this.style.fontSize = (currentSize + 2) + 'px';
-});
+        // Enhance Search Icon Functionality
+        const searchIcon = document.querySelector('nav a:nth-child(1)');
+        searchIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            const searchPrompt = prompt('Please enter your search query:');
+            if (searchPrompt) {
+                alert(`You searched for: ${searchPrompt}`);
+            }
+        });
+
+        // Social Media Icons Animation
+        const socialIcons = document.querySelectorAll('nav a:nth-child(3)');
+        socialIcons.forEach(icon => {
+            icon.addEventListener('mouseover', () => {
+                icon.style.transform = 'scale(1.2)';
+                icon.style.transition = 'transform 0.3s';
+            });
+            icon.addEventListener('mouseout', () => {
+                icon.style.transform = 'scale(1)';
+            });
+        });
+
+        // Improve Page Load Performance
+        window.addEventListener('load', () => {
+            const images = document.querySelectorAll('img');
+            images.forEach(image => {
+                image.loading = 'lazy';
+            });
+        });
+    </script>
 ```
