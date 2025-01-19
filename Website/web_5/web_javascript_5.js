@@ -1,86 +1,136 @@
-```css
-/* Additional CSS */
-
-/* Sticky Navbar */
-.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-/* Dark Mode */
-.dark-mode {
-    background-color: #333;
-    color: #fff;
-}
-
-#theme-switch {
-    display: none;
-}
-
-label[for="theme-switch"] {
-    color: #fff;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-/* Back to Top Button */
-.back-to-top-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.back-to-top-btn:hover {
-    background-color: #0056b3;
-}
-```
-
-JavaScript:
 ```javascript
-// Additional JavaScript
+// JavaScript for enhancing the website functionality
 
-// 4. Implement a scroll reveal effect for sections
-const sectionObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('reveal');
-            observer.unobserve(entry.target);
+document.addEventListener('DOMContentLoaded', () => {
+    // Toggle mobile menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Initialize Swiper for the featured section
+    const swiper = new Swiper('.swiper-container', {
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        autoplay: {
+            delay: 5000,
+        },
+    });
+
+    // Smooth scrolling for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Form validation for contact form
+    const contactForm = document.querySelector('#contact form');
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        if (name === '' || email === '') {
+            alert('Please fill all the required fields.');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        alert('Form submitted successfully');
+        contactForm.reset();
+    });
+
+    // Email validation function
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    // Feature: Back to top button
+    const backToTopButton = document.createElement('button');
+    backToTopButton.textContent = '↑';
+    backToTopButton.className = 'fixed bottom-4 right-4 bg-indigo-600 text-white p-2 rounded-full shadow-lg hidden';
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    document.body.appendChild(backToTopButton);
+
+    // Show/hide back to top button
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.remove('hidden');
+        } else {
+            backToTopButton.classList.add('hidden');
         }
     });
-}, { rootMargin: '0px 0px -100px 0px' }); // Adjust root margin as needed for when the element should start revealing
 
-document.querySelectorAll('section').forEach((section) => {
-    sectionObserver.observe(section);
-});
+    // Feature: Dark mode toggle
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.textContent = '🌙';
+    darkModeToggle.className = 'fixed top-4 right-4 bg-gray-800 text-white p-2 rounded-full shadow-lg';
+    document.body.appendChild(darkModeToggle);
 
-// 5. Create a dynamic navbar that updates with the sections on the page
-const dynamicNavLinks = document.createElement('div');
-dynamicNavLinks.classList.add('dynamic-nav-links');
-document.querySelector('.navbar').appendChild(dynamicNavLinks);
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+    });
 
-const sectionsForDynamicNav = document.querySelectorAll('section');
-sectionsForDynamicNav.forEach((section) => {
-    const dynamicNavLink = document.createElement('a');
-    dynamicNavLink.textContent = section.getAttribute('id');
-    dynamicNavLink.setAttribute('href', `#${section.getAttribute('id')}`);
-    dynamicNavLinks.appendChild(dynamicNavLink);
-});
+    // Apply dark mode styles
+    const darkModeStyles = `
+        body.dark {
+            background-color: #1a202c;
+            color: #cbd5e0;
+        }
+        body.dark .bg-white {
+            background-color: #2d3748;
+        }
+        body.dark .text-gray-800 {
+            color: #e2e8f0;
+        }
+        body.dark .text-indigo-600 {
+            color: #63b3ed;
+        }
+        body.dark .bg-indigo-600 {
+            background-color: #3182ce;
+        }
+        body.dark .bg-gray-100 {
+            background-color: #2d3748;
+        }
+        body.dark .bg-gray-200 {
+            background-color: #4a5568;
+        }
+        body.dark input, body.dark textarea {
+            background-color: #2d3748;
+            color: #cbd5e0;
+            border-color: #4a5568;
+        }
+    `;
 
-// 6. Implement a simple form validation for the newsletter form
-const newsletterForm = document.querySelector('.footer form');
-const emailInput = newsletterForm.querySelector('input[type="email"]');
-newsletterForm.addEventListener('submit', function (e) {
-    if (!emailInput.value.includes('@')) {
-        e.preventDefault();
-        alert('Please enter a valid email address.');
-    }
+    // Append dark mode styles to the head
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = darkModeStyles;
+    document.head.appendChild(styleElement);
 });
 ```
