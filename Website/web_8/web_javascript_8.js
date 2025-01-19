@@ -1,57 +1,64 @@
 ```javascript
-// Initially provided JavaScript code
+                // Ensure all slider items are hidden before showing the correct one
+                item, i) => {
+                item.style.transform = `translateX(-${index * 100}%)`;
+                item.style.transition = 'transform 0.5s ease';
+            });
+        }
 
-// Add event listener to the button
-document.getElementById("click-me-btn").addEventListener("click", function() {
-  // Change the text color of the paragraph
-  document.getElementById("change-text-color").style.color = "blue";
-});
+        function autoSlide() {
+            sliderIndex = (sliderIndex + 1) % sliderItems.length;
+            showSliderItem(sliderIndex);
+        }
 
-// New feature: Dark mode toggle
-let darkModeEnabled = false;
+        // Initialize slider
+        showSliderItem(sliderIndex);
+        setInterval(autoSlide, 3000); // Change slide every 3 seconds
 
-document.getElementById("dark-mode-toggle").addEventListener("click", function() {
-  darkModeEnabled = !darkModeEnabled;
-  const body = document.querySelector("body");
-  if (darkModeEnabled) {
-    body.style.backgroundColor = "black";
-    body.style.color = "white";
-  } else {
-    body.style.backgroundColor = "white";
-    body.style.color = "black";
-  }
-});
+        // Enhance Footer Email Subscription with Animation
+        const emailInput = document.querySelector('input[type="email"]');
+        const subscribeButton = emailInput.nextElementSibling;
 
-// New feature: Gamification - Click counter
-let clickCount = 0;
+        subscribeButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (emailInput.value) {
+                emailInput.value = ''; // Clear input
+                subscribeButton.innerText = 'Subscribed!';
+                setTimeout(() => {
+                    subscribeButton.innerText = '// Subscribe';
+                }, 2000);
+            } else {
+                emailInput.style.borderColor = 'red';
+                setTimeout(() => {
+                    emailInput.style.borderColor = '';
+                }, 500);
+            }
+        });
 
-document.getElementById("click-me-btn").addEventListener("click", function() {
-  clickCount++;
-  document.getElementById("click-count").textContent = clickCount;
-});
+        // Animate Social Media Icons in Footer
+        const socialMediaIcons = document.querySelectorAll('footer .// Social Media Links a');
+        socialMediaIcons.forEach(icon => {
+            icon.addEventListener('mouseover', () => {
+                icon.style.transform = 'scale(1.2)';
+                icon.style.transition = 'transform 0.3s';
+            });
+            icon.addEventListener('mouseout', () => {
+                icon.style.transform = 'scale(1)';
+            });
+        });
 
-// New feature: Push notifications
-const notifyButton = document.getElementById("notify-btn");
-
-notifyButton.addEventListener("click", function() {
-  if (Notification.permission !== "granted") {
-    Notification.requestPermission().then(function(permission) {
-      if (permission === "granted") {
-        new Notification("Notification", { body: "You clicked the Notify button!" });
-      }
-    });
-  } else {
-    new Notification("Notification", { body: "You clicked the Notify button!" });
-  }
-});
-
-// New feature: Multilingual support - Toggle between languages
-let currentLanguage = "en"; // Default language is English
-
-document.getElementById("lang-toggle").addEventListener("click", function() {
-  currentLanguage = currentLanguage === "en" ? "fr" : "en";
-  const langText = currentLanguage === "en" ? "Language: English" : "Langue : Français";
-  document.getElementById("lang-text").textContent = langText;
-});
-
+        // Add Keyboard Navigation for Main Menu
+        const mainMenuLinks = document.querySelectorAll('nav .md\\:block a');
+        mainMenuLinks.forEach((link, index) => {
+            link.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    mainMenuLinks[(index + 1) % mainMenuLinks.length].focus();
+                } else if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    mainMenuLinks[(index - 1 + mainMenuLinks.length) % mainMenuLinks.length].focus();
+                }
+            });
+        });
+    </script>
 ```
