@@ -1,199 +1,226 @@
 ```css
-/* Global Styles */
-body {
-    background-color: #f7f9fc; /* Slightly off-white for better readability */
-    color: #333; /* Dark gray text for contrast */
-    font-family: 'Sans-serif'; /* Sans-serif font for body text */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transitions for theme changes */
+/* General Settings */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Body font */
+    color: #333;
+    background-color: #f4f4f9;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode {
+    background-color: #1a1a2e;
+    color: #ccc;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Serif'; /* Serif font for headings */
-    margin-bottom: 0.5em; /* Consistent spacing below headings */
+    font-family: "Times New Roman", serif; /* Header font */
 }
 
-/* Navigation Bar */
-nav {
-    background-color: #ffffff; /* White background for nav */
-    color: #333333; /* Dark text for good contrast */
-    z-index: 1000; /* Ensure it stays on top of other content */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: top 0.3s; /* Smooth transition for navbar hiding/showing */
-    border-bottom: 1px solid #e5e7eb; /* Subtle bottom border */
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-nav a {
-    color: inherit; /* Inherit color for links */
-    padding: 1em; /* Uniform padding for clickable area */
-    text-decoration: none; /* Remove underlines */
-    transition: color 0.3s; /* Smooth hover effect */
+a:hover {
+    color: #007bff; /* Accent color */
 }
 
-nav a:hover {
-    color: #2563eb; /* Bright blue on hover */
+img {
+    max-width: 100%;
+    height: auto;
 }
 
-/* Quick Access Icons */
-nav .flex.items-center.space-x-3 a {
-    padding: 0.5em; /* Smaller padding for icons */
+/* Navbar */
+.navbar {
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-shrink {
+    background-color: rgba(51, 51, 51, 0.9); /* Slight transparency when scrolled */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #007bff; /* Accent color */
 }
 
 /* Hero Section */
-header {
-    display: flex; /* Flexbox for centering content */
-    align-items: center; /* Vertical centering */
-    justify-content: center; /* Horizontal centering */
-    color: #ffffff; /* White text for contrast on dark overlay */
-    text-align: center; /* Center align text */
+.hero {
+    height: 100vh;
+    background: url('hero.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5); /* Gradient overlay */
 }
 
-header h1 {
-    font-size: 2.5em; /* Large hero headline */
-    line-height: 1.2; /* Tight line height for a bold look */
-    opacity: 0; /* Start the typewriter text hidden */
-    animation: typewriter 2s steps(40) 0.5s forwards, /* Typewriter effect */
-               blink 0.75s step-end infinite; /* Cursor blink */
+.hero h1, .hero p {
+    margin: 0;
+    padding: 0 20px;
 }
 
-/* Typewriter effect for hero headline */
-@keyframes typewriter {
-    from { opacity: 0; width: 0; }
-    to { opacity: 1; width: 100%; }
+.hero .btn {
+    background-color: #007bff; /* Accent color */
+    border: none;
+    transition: background-color 0.3s ease;
 }
 
-@keyframes blink {
-    from, to { border-color: transparent; }
-    50% { border-color: #ffffff; }
-}
-
-header button {
-    background-color: #2563eb; /* Blue background for CTA */
-    border: none; /* Remove default button border */
-    border-radius: 0.5em; /* Rounded corners */
-    padding: 0.75em 1.5em; /* Padding for touch targets */
-    transition: transform 0.2s, background-color 0.3s; /* Smooth hover effects */
-}
-
-header button:hover {
-    background-color: #1e40af; /* Darker blue on hover */
+.hero .btn:hover {
+    background-color: #0056b3; /* Darker accent color */
 }
 
 /* Featured Section */
-section {
-    background-color: #ffffff; /* White background for contrast */
-    padding: 2em 0; /* Vertical padding */
-}
-
-section h2 {
-    color: #1f2937; /* Darker heading for readability */
-    margin-bottom: 1em; /* Space below */
-}
-
-.flex.overflow-x-scroll {
-    display: flex; /* Flex layout for slider */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    gap: 1em; /* Space between items */
-}
-
-.flex.overflow-x-scroll div {
-    background-color: #e5e7eb; /* Light gray background */
-    border-radius: 0.5em; /* Rounded corners */
-    flex: 0 0 30%; /* Custom width for slider items */
-    transition: transform 0.3s; /* Smooth scaling effect */
-}
-
-.flex.overflow-x-scroll div:hover {
-    transform: scale(1.05); /* Slightly enlarge on hover */
+.featured-slider {
+    margin: 80px 0;
 }
 
 /* Footer */
-footer {
-    background-color: #1f2937; /* Dark background for footer */
-    color: #d1d5db; /* Light gray text */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
 }
 
-footer h3 {
-    color: #ffffff; /* White text for headings */
-    margin-bottom: 0.5em; /* Space below */
+.footer a {
+    color: #fff;
 }
 
-footer a {
-    color: inherit; /* Inherit color for links */
-    text-decoration: none; /* Remove underlines */
+.footer a:hover {
+    color: #007bff; /* Accent color */
 }
 
-footer a:hover {
-    text-decoration: underline; /* Underline on hover */
+.footer h5 {
+    margin-bottom: 15px;
 }
 
-footer input[type=email] {
-    background-color: #e5e7eb; /* Light gray for input background */
-    border: none; /* Remove borders */
-    border-radius: 0.5em; /* Rounded corners */
-    padding: 0.5em; /* Padding for touch targets */
+.footer ul {
+    list-style: none;
+    padding: 0;
 }
 
-footer button {
-    background-color: #2563eb; /* Blue for call-to-action */
-    border: none; /* Remove default button border */
-    border-radius: 0.5em; /* Rounded corners */
-    padding: 0.5em 1em; /* Padding for touch targets */
-    transition: background-color 0.3s; /* Smooth hover effect */
+.footer ul li {
+    margin: 5px 0;
 }
 
-footer button:hover {
-    background-color: #1e40af; /* Darker blue on hover */
+/* Quick Access Icons */
+.quick-access {
+    position: absolute;
+    top: 10px;
+    right: 15px;
 }
 
-/* Dark Mode */
-.dark-mode {
-    background-color: #121212; /* Dark background for dark mode */
-    color: #bcbcbc; /* Light gray text for dark mode */
+.quick-access a {
+    color: #fff;
+    margin-left: 10px;
 }
 
-.dark-mode nav {
-    background-color: #1f1f1f; /* Darker nav background */
+.quick-access a:hover {
+    color: #007bff; /* Accent color */
 }
 
-.dark-mode footer {
-    background-color: #1a1a1a; /* Dark footer background */
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    cursor: pointer;
+    padding: 10px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    z-index: 1001;
 }
 
-.dark-mode header {
-    background-color: #1a1a1a; /* Dark background for header */
-}
-
-.dark-mode header button {
-    background-color: #333; /* Darker button in dark mode */
-}
-
-.dark-mode header button:hover {
-    background-color: #444; /* Slightly lighter hover in dark mode */
-}
-
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 768px) {
-    nav a {
-        display: block; /* Stack links vertically */
-        padding: 0.75em; /* Adjust padding for smaller displays */
+    .navbar-nav {
+        text-align: center;
     }
 
-    .flex.overflow-x-scroll div {
-        flex: 0 0 80%; /* Wider slider items on mobile */
+    .hero {
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .footer .container {
+        text-align: center;
     }
 }
 
-@media (min-width: 768px) {
-    nav .md\\:block {
-        display: block !important; /* Ensure correct display on larger screens */
-    }
+/* Additional Features */
+.back-to-top {
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.back-to-top:hover {
+    background-color: #0056b3; /* Darker accent color */
+}
+
+.carousel-indicators li {
+    background-color: #333;
+}
+
+.carousel-indicators .active {
+    background-color: #007bff;
+}
+
+/* Custom Styles for Additional Features */
+.quick-access.d-none {
+    display: none;
+}
+
+.quick-access-toggle {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.quick-access-toggle:hover {
+    background-color: #0056b3; /* Darker accent color */
+}
+
+/* Notification Banner */
+.notification-banner {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    z-index: 1002;
+    display: none;
+    transition: top 0.3s ease;
 }
 ```
-
-### Additional Improvements:
-
-1. **Image Optimization**: Consider using `srcset` and `<picture>` elements to serve different image sizes based on screen resolution for better performance and visual quality.
-2. **Accessibility Improvements**: Regularly test with screen readers and ensure all interactive elements are accessible via keyboard. Use semantic HTML and ARIA attributes where necessary.
-3. **Performance Enhancements**: Minimize CSS and JavaScript files using a tool like Webpack or Gulp. Enable HTTP/2 for faster asset loading.
-4. **Security Enhancements**: Regularly review security headers and ensure they are updated to protect against XSS, CSRF, and other vulnerabilities.
-5. **Continuous Monitoring**: Integrate monitoring solutions to track uptime, performance issues, and error logging to proactively resolve issues.
