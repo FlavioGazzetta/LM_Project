@@ -1,87 +1,96 @@
 ```javascript
-// Initialize Swiper 
-var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    breakpoints: {
-        640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-        },
-        1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-        },
+// JavaScript code to enhance the functionality of the website
+
+// Dark Mode Toggle
+document.getElementById('dark-mode-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+});
+
+// Responsive Hamburger Menu
+const hamburger = document.querySelector('.hamburger-menu input');
+const navLinks = document.querySelector('.nav-links');
+hamburger.addEventListener('click', function() {
+    navLinks.classList.toggle('open');
+});
+
+// Hero Section Button Scroll
+document.querySelector('.cta-btn').addEventListener('click', function() {
+    document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
+});
+
+// Slider Functionality for Featured Section
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.style.display = i === index ? 'block' : 'none';
+    });
+}
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+setInterval(nextSlide, 3000);
+showSlide(currentSlide);
+
+// Form Validation for Contact Section
+const form = document.querySelector('form');
+form.addEventListener('submit', function(event) {
+    const name = form.querySelector('input[type="text"]').value;
+    const email = form.querySelector('input[type="email"]').value;
+    const message = form.querySelector('textarea').value;
+    if (!name || !email || !message) {
+        alert('All fields are required!');
+        event.preventDefault();
     }
 });
 
-// Toggle mobile menu visibility
-document.getElementById('menu-toggle').addEventListener('click', function () {
-    var menu = document.getElementById('mobile-menu');
-    menu.classList.toggle('hidden');
-});
-
-// Scroll smoothly to sections on link click
-document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Display a back-to-top button after scrolling a certain distance
-var backToTopButton = document.createElement('button');
-backToTopButton.innerText = '↑';
-backToTopButton.className = 'fixed right-4 bottom-4 p-2 bg-indigo-600 text-white rounded-full shadow-lg opacity-0 transition-opacity';
-document.body.appendChild(backToTopButton);
-
-window.addEventListener('scroll', function () {
-    if (window.scrollY > 300) {
-        backToTopButton.classList.remove('opacity-0');
+// Newsletter Subscription Feedback
+const newsletterInput = document.querySelector('.newsletter input');
+const subscribeButton = document.querySelector('.newsletter button');
+subscribeButton.addEventListener('click', function() {
+    if (newsletterInput.value) {
+        alert('Thank you for subscribing!');
+        newsletterInput.value = '';
     } else {
-        backToTopButton.classList.add('opacity-0');
+        alert('Please enter a valid email address.');
     }
 });
 
-backToTopButton.addEventListener('click', function () {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+// Improve Accessibility
+document.querySelectorAll('a, button').forEach(el => {
+    el.setAttribute('tabindex', '0');
+});
+document.querySelectorAll('img').forEach(img => {
+    img.setAttribute('alt', img.getAttribute('alt') || 'Image description');
+});
+
+// Lazy Loading for Images
+document.querySelectorAll('img').forEach(img => {
+    img.setAttribute('loading', 'lazy');
+});
+
+// FAQ Toggle Functionality
+const faqSections = document.querySelectorAll('.faq');
+faqSections.forEach(faq => {
+    faq.addEventListener('click', function() {
+        faq.classList.toggle('expanded');
     });
 });
 
-// Add form validation for contact form
-document.querySelector('form').addEventListener('submit', function (e) {
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
+// Map Initialization Placeholder
+const mapDiv = document.querySelector('.map');
+mapDiv.innerHTML = 'Map will be initialized here.';
 
-    if (name === '' || email === '' || message === '') {
-        e.preventDefault();
-        alert('Please fill out all fields!');
+// Auto-hide Navbar on Scroll
+let lastScrollTop = 0;
+window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if (currentScroll > lastScrollTop) {
+        document.querySelector('header').classList.add('hidden');
     } else {
-        alert('Message sent successfully!');
+        document.querySelector('header').classList.remove('hidden');
     }
-});
-
-// Enhance the UI with animations on section entry
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('section').forEach(section => {
-    section.classList.add('opacity-0', 'transition-opacity', 'duration-500');
-    observer.observe(section);
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
 });
 ```
