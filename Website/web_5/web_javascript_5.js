@@ -1,136 +1,106 @@
 ```javascript
-// JavaScript for enhancing the website functionality
+// Function to toggle dark mode
+const toggleDarkMode = () => {
+    document.body.classList.toggle('dark-mode');
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Toggle mobile menu
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
+// Event listener for dark mode toggle button
+document.getElementById('dark-mode-toggle').addEventListener('click', toggleDarkMode);
 
-    menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
+// Function to handle language toggle
+const handleLanguageToggle = (lang) => {
+    // Placeholder function for language switching logic
+    console.log(`Language switched to: ${lang}`);
+    // Here, you can integrate your language translation logic
+};
 
-    // Initialize Swiper for the featured section
-    const swiper = new Swiper('.swiper-container', {
-        loop: true,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        autoplay: {
-            delay: 5000,
-        },
-    });
+// Event listeners for language buttons
+document.querySelectorAll('.language-toggle button').forEach(button => {
+    button.addEventListener('click', () => handleLanguageToggle(button.textContent));
+});
 
-    // Smooth scrolling for anchor links
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Form validation for contact form
-    const contactForm = document.querySelector('#contact form');
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-
-        if (name === '' || email === '') {
-            alert('Please fill all the required fields.');
-            return;
-        }
-
-        if (!validateEmail(email)) {
-            alert('Please enter a valid email address.');
-            return;
-        }
-
-        alert('Form submitted successfully');
-        contactForm.reset();
-    });
-
-    // Email validation function
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
+// Hamburger menu toggle for mobile view
+document.querySelector('.hamburger-menu input').addEventListener('change', function() {
+    const navLinks = document.querySelector('.nav-links');
+    if (this.checked) {
+        navLinks.style.display = 'block';
+    } else {
+        navLinks.style.display = 'none';
     }
+});
 
-    // Feature: Back to top button
-    const backToTopButton = document.createElement('button');
-    backToTopButton.textContent = '↑';
-    backToTopButton.className = 'fixed bottom-4 right-4 bg-indigo-600 text-white p-2 rounded-full shadow-lg hidden';
-    backToTopButton.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
+// Slider functionality for featured section
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const numSlides = slides.length;
+
+const showSlide = (index) => {
+    slides.forEach((slide, i) => {
+        slide.style.display = i === index ? 'block' : 'none';
+    });
+};
+
+const nextSlide = () => {
+    currentSlide = (currentSlide + 1) % numSlides;
+    showSlide(currentSlide);
+};
+
+// Initialize slider
+showSlide(currentSlide);
+// Auto slide every 3 seconds
+setInterval(nextSlide, 3000);
+
+// Form submission handler to prevent default and simulate an action
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('Form submitted!');
+});
+
+// Placeholder function for newsletter subscription
+document.querySelector('.newsletter button').addEventListener('click', function() {
+    const emailInput = document.querySelector('.newsletter input');
+    if (emailInput.value) {
+        alert(`Subscribed with email: ${emailInput.value}`);
+        emailInput.value = ''; // Clear input field
+    } else {
+        alert('Please enter your email.');
+    }
+});
+
+// Add smooth scrolling for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(event) {
+        event.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
             behavior: 'smooth'
         });
     });
-    document.body.appendChild(backToTopButton);
-
-    // Show/hide back to top button
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopButton.classList.remove('hidden');
-        } else {
-            backToTopButton.classList.add('hidden');
-        }
-    });
-
-    // Feature: Dark mode toggle
-    const darkModeToggle = document.createElement('button');
-    darkModeToggle.textContent = '🌙';
-    darkModeToggle.className = 'fixed top-4 right-4 bg-gray-800 text-white p-2 rounded-full shadow-lg';
-    document.body.appendChild(darkModeToggle);
-
-    darkModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark');
-    });
-
-    // Apply dark mode styles
-    const darkModeStyles = `
-        body.dark {
-            background-color: #1a202c;
-            color: #cbd5e0;
-        }
-        body.dark .bg-white {
-            background-color: #2d3748;
-        }
-        body.dark .text-gray-800 {
-            color: #e2e8f0;
-        }
-        body.dark .text-indigo-600 {
-            color: #63b3ed;
-        }
-        body.dark .bg-indigo-600 {
-            background-color: #3182ce;
-        }
-        body.dark .bg-gray-100 {
-            background-color: #2d3748;
-        }
-        body.dark .bg-gray-200 {
-            background-color: #4a5568;
-        }
-        body.dark input, body.dark textarea {
-            background-color: #2d3748;
-            color: #cbd5e0;
-            border-color: #4a5568;
-        }
-    `;
-
-    // Append dark mode styles to the head
-    const styleElement = document.createElement('style');
-    styleElement.innerHTML = darkModeStyles;
-    document.head.appendChild(styleElement);
 });
+
+// New Feature: Back to top button
+const backToTopButton = document.createElement('button');
+backToTopButton.textContent = 'Top';
+backToTopButton.id = 'back-to-top';
+document.body.appendChild(backToTopButton);
+backToTopButton.style.display = 'none';
+backToTopButton.style.position = 'fixed';
+backToTopButton.style.bottom = '20px';
+backToTopButton.style.right = '20px';
+
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopButton.style.display = 'block';
+    } else {
+        backToTopButton.style.display = 'none';
+    }
+});
+
+// Further optimizations and enhancements could involve progressive image loading, integrating PWA features, and more advanced state management for better user experience.
 ```
