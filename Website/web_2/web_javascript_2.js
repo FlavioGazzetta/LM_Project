@@ -1,80 +1,96 @@
 ```javascript
-// Dark Mode Toggle Functionality
-const toggle = document.getElementById('darkModeToggle');
-toggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-});
-
-// Scroll to Top Button
-const scrollToTopBtn = document.createElement('button');
-scrollToTopBtn.innerText = '↑';
-scrollToTopBtn.style.position = 'fixed';
-scrollToTopBtn.style.bottom = '70px';
-scrollToTopBtn.style.right = '4px';
-scrollToTopBtn.style.padding = '10px';
-scrollToTopBtn.style.backgroundColor = '#333';
-scrollToTopBtn.style.color = '#fff';
-scrollToTopBtn.style.border = 'none';
-scrollToTopBtn.style.borderRadius = '50%';
-scrollToTopBtn.style.display = 'none';
-scrollToTopBtn.style.cursor = 'pointer';
-document.body.appendChild(scrollToTopBtn);
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 200) {
-        scrollToTopBtn.style.display = 'block';
-    } else {
-        scrollToTopBtn.style.display = 'none';
-    }
-});
-
-scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Responsive Navigation Toggle
-const navToggle = document.createElement('button');
-navToggle.innerText = '☰';
-navToggle.style.fontSize = '20px';
-navToggle.style.position = 'absolute';
-navToggle.style.top = '12px';
-navToggle.style.right = '12px';
-navToggle.style.display = 'block';
-navToggle.style.cursor = 'pointer';
-navToggle.className = 'md:hidden';
-const navBar = document.querySelector('nav .md\\:block');
-navBar.parentNode.insertBefore(navToggle, navBar);
-
-navToggle.addEventListener('click', () => {
-    navBar.classList.toggle('hidden');
-});
-
-// Hero Section CTA Button Effect
-const heroButton = document.querySelector('header button');
-heroButton.addEventListener('mouseover', () => {
-    heroButton.style.transform = 'scale(1.1)';
-});
-heroButton.addEventListener('mouseout', () => {
-    heroButton.style.transform = 'scale(1)';
-});
-
-// Featured Section Auto Slider
-const sliderItems = document.querySelectorAll('.flex.overflow-x-scroll .w-1\\/3.flex-none');
-let sliderIndex = 0;
-
-function showSliderItem(index) {
-    sliderItems.forEach((item, i) => {
-        item.style.display = i === index ? 'block' : 'none';
+// Initializing document readiness
+document.addEventListener('DOMContentLoaded', function() {
+    // Functionality for Dark Mode
+    const darkModeToggle = document.querySelector('.dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        // Save dark mode preference to localStorage
+        const darkModeEnabled = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', darkModeEnabled);
     });
-}
 
-function nextSlide() {
-    sliderIndex = (sliderIndex + 1) % sliderItems.length;
-    showSliderItem(sliderIndex);
-}
+    // Load dark mode preference from localStorage
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
 
-setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    // Smooth scrolling for internal links
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
 
-// Show the first slide initially
-showSliderItem(sliderIndex);
+    // Enhance carousel functionality
+    const carouselElement = document.querySelector('#carouselExampleControls');
+    const carouselIndicators = document.createElement('ol');
+    carouselIndicators.className = 'carousel-indicators';
+    carouselElement.prepend(carouselIndicators);
+
+    const carouselItems = carouselElement.querySelectorAll('.carousel-item');
+    carouselItems.forEach((item, index) => {
+        const indicator = document.createElement('li');
+        indicator.setAttribute('data-target', '#carouselExampleControls');
+        indicator.setAttribute('data-slide-to', index);
+        if (index === 0) indicator.classList.add('active');
+        carouselIndicators.appendChild(indicator);
+        // Add event listeners to indicators
+        indicator.addEventListener('click', () => {
+            $('#carouselExampleControls').carousel(index);
+        });
+    });
+
+    // Form validation for newsletter subscription
+    const newsletterForm = document.querySelector('.footer form');
+    newsletterForm.addEventListener('submit', function(e) {
+        const emailInput = this.querySelector('input[type="email"]');
+        if (!validateEmail(emailInput.value)) {
+            e.preventDefault();
+            alert('Please enter a valid email address.');
+        }
+    });
+
+    // Email validation function
+    function validateEmail(email) {
+        const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return re.test(email);
+    }
+
+    // Implementing "Back to Top" button
+    const backToTopButton = document.createElement('button');
+    backToTopButton.innerText = '↑';
+    backToTopButton.className = 'back-to-top';
+    backToTopButton.style.display = 'none';
+    backToTopButton.style.position = 'fixed';
+    backToTopButton.style.bottom = '20px';
+    backToTopButton.style.right = '20px';
+    backToTopButton.style.zIndex = '1000';
+    backToTopButton.style.padding = '10px 15px';
+    backToTopButton.style.border = 'none';
+    backToTopButton.style.backgroundColor = '#333';
+    backToTopButton.style.color = '#fff';
+    backToTopButton.style.cursor = 'pointer';
+    document.body.appendChild(backToTopButton);
+
+    // Show/hide back-to-top button
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
+
+    // Scroll to top functionality
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
 ```
