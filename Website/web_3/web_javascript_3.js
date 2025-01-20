@@ -1,73 +1,100 @@
 ```javascript
-// JavaScript to Enhance Website Functionality
+// JavaScript to enhance functionality
 
-// Function to toggle the mobile menu visibility
-document.getElementById('menu-toggle').addEventListener('click', function() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenu.classList.toggle('hidden');
-});
-
-// Function to initiate Swiper.js for featured section slider
+// DOMContentLoaded to ensure script runs after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    new Swiper('.swiper-container', {
-        loop: true,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-    });
-});
 
-// Feature: Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
+    // Toggle mobile menu when hamburger is clicked
+    const hamburgerMenu = document.querySelector('.hamburger-menu input');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburgerMenu.addEventListener('change', function() {
+        navLinks.classList.toggle('active');
+    });
+
+    // Implement smooth scrolling for navigation links
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Dark mode toggle functionality
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+    
+    darkModeToggle.addEventListener('click', function() {
+        body.classList.toggle('dark-mode');
+    });
+
+    // Language toggle functionality
+    const languageToggleButtons = document.querySelectorAll('.language-toggle button');
+    
+    languageToggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Placeholder for actual language switching logic
+            // In a real-world scenario, this would involve loading language-specific content
+            alert('Language switched to ' + this.textContent);
+        });
+    });
+
+    // Hero section button to scroll to features
+    const ctaButton = document.querySelector('.cta-btn');
+    
+    ctaButton.addEventListener('click', function() {
+        document.getElementById('features').scrollIntoView({
             behavior: 'smooth'
         });
     });
-});
 
-// Feature: Form validation feedback
-const form = document.querySelector('form');
-form.addEventListener('submit', function(event) {
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const message = document.getElementById('message');
-
-    if (!name.value || !email.value || !message.value) {
-        event.preventDefault();
-        alert('Please fill out all fields.');
+    // Slider functionality for the featured section
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'block' : 'none';
+        });
     }
-});
-
-// Feature: Back to top button
-const backToTopButton = document.createElement('button');
-backToTopButton.innerText = '↑';
-backToTopButton.className = 'fixed bottom-4 right-4 p-2 bg-indigo-600 text-white rounded-full hidden';
-document.body.appendChild(backToTopButton);
-
-backToTopButton.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-window.addEventListener('scroll', function() {
-    if (window.scrollY > 300) {
-        backToTopButton.classList.remove('hidden');
-    } else {
-        backToTopButton.classList.add('hidden');
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
     }
-});
+    
+    showSlide(currentSlide);
+    setInterval(nextSlide, 3000); // Switch slides every 3 seconds
 
-// Feature: Dark mode toggle
-const darkModeToggle = document.createElement('button');
-darkModeToggle.innerText = '🌙';
-darkModeToggle.className = 'fixed top-4 right-4 p-2 bg-gray-200 text-gray-800 rounded-full';
-document.body.appendChild(darkModeToggle);
+    // Form validation for contact section
+    const contactForm = document.querySelector('#contact form');
+    
+    contactForm.addEventListener('submit', function(e) {
+        const name = contactForm.querySelector('input[type="text"]').value.trim();
+        const email = contactForm.querySelector('input[type="email"]').value.trim();
+        const message = contactForm.querySelector('textarea').value.trim();
+        
+        if (!name || !email || !message) {
+            e.preventDefault();
+            alert('Please fill in all fields before submitting.');
+        }
+    });
 
-darkModeToggle.addEventListener('click', function() {
-    document.body.classList.toggle('dark');
-    document.body.classList.toggle('bg-gray-800');
-    document.body.classList.toggle('text-white');
+    // Newsletter subscription functionality
+    const newsletterForm = document.querySelector('.newsletter');
+    const subscribeButton = newsletterForm.querySelector('button[type="submit"]');
+    
+    subscribeButton.addEventListener('click', function() {
+        const email = newsletterForm.querySelector('input[type="email"]').value.trim();
+        if (!email) {
+            alert('Please enter an email address to subscribe.');
+        } else {
+            alert('Thank you for subscribing!');
+            newsletterForm.querySelector('input[type="email"]').value = ''; // Clear input field
+        }
+    });
+
 });
 ```
