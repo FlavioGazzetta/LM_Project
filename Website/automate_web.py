@@ -15,7 +15,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 repo_path = r"C:\Users\User\Documents\LM_Project1\LM_Project\Website"
 stage_prefix = "web_"
 daily_request_limit = 10000
-max_tokens = 2000
+max_tokens = 10000
 delay_seconds = 5
 request_count = 0
 max_retries = 5
@@ -73,9 +73,9 @@ def generate_content(prompt):
         try:
             time.sleep(delay_seconds)
             response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o",
                 messages=[
-                    {"role": "system", "content": "You are a highly skilled web developer. Who wants to make sure he every single requirement asked to him is fulfilled"},
+                    {"role": "system", "content": "You are a highly skilled web developer. Who wants to make sure he every single requirement asked to him is fulfilled, you are never satisfied with the product and always want to improve it no matter how good it is"},
                     {"role": "user", "content": prompt}
                 ],
                 max_tokens=max_tokens,
@@ -117,7 +117,7 @@ def process_stage(stage_number):
         return False
 
     # Generate HTML
-    html_prompt = f"Based on the following description, create an HTML structure for a website. Only provide the full HTML code, make sure the first documents requirements are all met and if they are add new features on top:\n\n{initial_content}"
+    html_prompt = f"Based on the following description, create an HTML structure for a website.Only provide the full HTML code, no other code of any other language and no english text other than the descriptions with a // before them. Make sure the first documents requirements are all met and if they are add new features on top, if you believe that the webiste is perfect add a new feature anyway:\n\n{initial_content}"
     html_content = generate_content(html_prompt)
     if not html_content:
         print("Error generating HTML content. Exiting.")
@@ -129,7 +129,7 @@ def process_stage(stage_number):
     push_to_github(f"{stage_prefix}{stage_number}/web_html_{stage_number}.html", f"Add HTML for stage {stage_number}")
 
     # Generate JavaScript
-    js_prompt = f"Based on the following HTML, create JavaScript to enhance its functionality. Only provide the full JavaScript code, make sure the first documents requirements are all met and if they are add new features on top:\n\n{html_content}"
+    js_prompt = f"Based on the following HTML, create JavaScript to enhance its functionality. Only provide the full javascript code, no other code of any other language and no english text other than the descriptions with a // before them. Make sure the first documents requirements are all met and if they are add new features on top:\n\n{html_content}"
     js_content = generate_content(js_prompt)
     if not js_content:
         print("Error generating JavaScript content. Exiting.")
@@ -141,7 +141,7 @@ def process_stage(stage_number):
     push_to_github(f"{stage_prefix}{stage_number}/web_javascript_{stage_number}.js", f"Add JavaScript for stage {stage_number}")
 
     # Generate CSS
-    css_prompt = f"Based on the following description, HTML, and JavaScript, create a CSS file to style the website. Only provide the full CSS code, make sure the first documents requirements are all met and if they are add new features on top:\n\nDescription:\n{initial_content}\n\nHTML:\n{html_content}\n\nJavaScript:\n{js_content}"
+    css_prompt = f"Based on the following description, HTML, and JavaScript, create a CSS file to style the website. Only provide the full CSS code, no other code of any other language and no english text other than the descriptions with a // before them. make sure the first documents requirements are all met and if they are add new features on top:\n\nDescription:\n{initial_content}\n\nHTML:\n{html_content}\n\nJavaScript:\n{js_content}"
     css_content = generate_content(css_prompt)
     if not css_content:
         print("Error generating CSS content. Exiting.")

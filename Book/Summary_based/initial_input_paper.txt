@@ -1,0 +1,5 @@
+Chapter 1: Introduction to RISC-V Architecture
+
+RISC-V (Reduced Instruction Set Computing) is an open-source instruction set architecture (ISA) that has revolutionized the way processors are designed and implemented. Unlike proprietary ISAs like ARM and x86, RISC-V offers a flexible, modular, and customizable framework that allows both researchers and companies to innovate freely.
+
+The journey of RISC-V began in the 1980s with the work of David Patterson and Krste Asanović at the University of California, Berkeley. What started as a research project quickly evolved into a community-driven movement, giving rise to one of the most influential ISAs in modern computing. In this chapter, we will explore the origins of RISC-V, its key principles, and the revolutionary impact it has had on processor design.
