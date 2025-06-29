@@ -122,9 +122,9 @@ def generate_new_content(previous_content, chapter_number, version_count):
 
             # Pass content to GPT for continuation
             response = openai.ChatCompletion.create(
-                model="gpt-o4-mini",
-                messages=[ 
-                    {"role": "system", "content": f"You are a writer with the following traits: {traits}"},
+                model="gpt-3.5-turbo",
+                messages=[{
+                    "role": "system", "content": f"You are a writer with the following traits: {traits}"},
                     {"role": "user", "content": f"Write the next page in the book, continuing from the following content (last 5 versions). The book is about processors, and you are currently working on page {chapter_number}. Keep the tone consistent, technical, and engaging. The content has covered various aspects of processors. Here's the previous content:\n\n{previous_content}"}
                 ],
                 max_tokens=max_tokens,
@@ -136,16 +136,16 @@ def generate_new_content(previous_content, chapter_number, version_count):
 
             content = response['choices'][0]['message']['content'].strip()
 
-            # Introduce new topics based on the last content
+            # Prevent redundancy by introducing new topics
             if version_count >= topic_transition_threshold:
-                content += "\n\nNow that we've covered the foundational aspects of processor evolution, let's move to more advanced implementations, including out-of-order execution and branch prediction techniques."
+                content += "\n\nNow that we've covered enough on processor evolution and their history, let's move to the next chapter on advanced implementation strategies in processors."
 
                 topic_threshold_reached = True
 
             # Extract specific image prompt based on content
             image_prompt = extract_image_prompt(content)
             if not image_prompt:
-                image_prompt = "Create an illustration related to processors, focusing on key technical aspects like pipeline or vector extensions."
+                image_prompt = "Create an illustration related to processor architecture focusing on key technical aspects like pipeline or vector extensions."
 
             return content, image_prompt, topic_threshold_reached
 
@@ -220,7 +220,7 @@ def iterative_improvement():
         generate_image(image_prompt, image_path)
 
         # Push to GitHub
-        push_to_github(f"version_{version}.txt", f"Add page {version} of processor evolution")
+        push_to_github(f"version_{version}.txt", f"Add page {version} of processor architecture")
         push_to_github(f"version_{version}_image.png", f"Add illustration for page {version}")
 
         version += 1
